@@ -3,36 +3,36 @@
 namespace App\Commands;
 
 use App\Services\InputService;
-use App\Services\LocationService;
+use App\Services\ReactorService;
 use LaravelZero\Framework\Commands\Command;
 
-class DayOneCommand extends Command
+class DayTwoCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'day-one {inputFileName} {--part=}';
+    protected $signature = 'day-two {inputFileName} {--part=1}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Advent of Code day 1';
+    protected $description = 'Advent of Code day 2';
 
     /**
      * Execute the console command.
      */
-    public function handle(InputService $inputService, LocationService $locationService): int
+    public function handle(InputService $inputService, ReactorService $reactorService): int
     {
         $inputService->setFile($this->argument('inputFileName'));
 
         if ($this->option('part') == 1) {
-            $this->info('Solution: '.$locationService->getTotalDistanceBetweenLocations());
+            $this->info('Solution: '.$reactorService->getTotalSafeReports());
         } else {
-            $this->info('Solution: '.$locationService->getLocationSimilarityScore());
+            $this->info('Solution: '.$reactorService->getTotalSafeReportsWithDampener());
         }
 
         return Command::SUCCESS;

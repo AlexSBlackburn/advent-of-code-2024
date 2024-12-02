@@ -6,13 +6,11 @@ class LocationService
 {
     public function __construct(
         private InputService $inputService
-    )
-    {
-    }
+    ) {}
 
     public function getTotalDistanceBetweenLocations(): int
     {
-        $inputs = $this->inputService->getInputs();
+        $inputs = $this->inputService->getLocationInputs();
 
         $left = $inputs->first()->sort()->values();
         $right = $inputs->last()->sort()->values();
@@ -30,7 +28,7 @@ class LocationService
 
     public function getLocationSimilarityScore(): int
     {
-        $inputs = $this->inputService->getInputs();
+        $inputs = $this->inputService->getLocationInputs();
         $left = $inputs->first()->sort()->values();
         $right = $inputs->last()->sort()->values()->countBy(); // 1 => 3, 2 => 2, 3 => 1, etc
 

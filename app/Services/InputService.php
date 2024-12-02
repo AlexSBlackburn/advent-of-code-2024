@@ -9,7 +9,7 @@ class InputService
 {
     private string $fileName;
 
-    public function getInputs(): Collection
+    public function getLocationInputs(): Collection
     {
         $left = collect();
         $right = collect();
@@ -28,6 +28,16 @@ class InputService
         ]);
     }
 
+    public function getReactorReportInputs(): Collection
+    {
+        return str($this->getFileContents())
+            ->trim()
+            ->explode("\n")
+            ->map(function (string $line) {
+                return str($line)->explode(' ');
+            });
+    }
+
     public function setFile(string $fileName): void
     {
         $this->fileName = $fileName;
@@ -35,6 +45,6 @@ class InputService
 
     private function getFileContents(): string
     {
-        return File::get(base_path('/storage/inputs/' . $this->fileName . '.txt'));
+        return File::get(base_path('/storage/inputs/'.$this->fileName.'.txt'));
     }
 }
