@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $singletons = [
+        \App\Services\InputService::class => \App\Services\InputService::class,
+        \App\Services\LocationService::class => \App\Services\LocationService::class,
+    ];
+
     /**
      * Bootstrap any application services.
      */
